@@ -62,14 +62,14 @@ function GlobeComponent({
       .heatmapPointLat((d: any) => d.lat)
       .heatmapPointLng((d: any) => d.lng)
       .heatmapPointWeight((d: any) => d.weight)
-      .heatmapTopAltitude(0.7) // Top altitude
+      .heatmapTopAltitude(0.7)
     console.log('Globe created');
     // Make heatmap materials transparent after globe is created
     setTimeout(() => {
       console.log('Making heatmap transparent...');
       console.log('Globe children count:', globe.children.length);
       
-      // // Find and make heatmap materials transparent
+      // Find and make heatmap materials transparent
       globe.traverse((child: any) => {
         if (child.material) {
           const materials = Array.isArray(child.material) 
@@ -78,9 +78,8 @@ function GlobeComponent({
           
           materials.forEach((mat: any) => {
             if (mat && mat.type && mat.type.includes('Shader')) {
-              // This is likely a heatmap material
               mat.transparent = false;
-              mat.opacity = 0.6; // Very transparent
+              mat.opacity = 0.6; 
               mat.depthWrite = true; 
               mat.needsUpdate = true;
             }
@@ -100,7 +99,6 @@ function GlobeComponent({
           <sphereGeometry args={[100, 32, 32]} />
           <meshPhongMaterial 
             map={texture}
-            color="#ffffff" // White color so texture shows properly
           />
         </mesh>
       )}
